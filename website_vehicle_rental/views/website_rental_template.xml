@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Rent Request form template-->
+    <template id="website_rental_template" name="VehicleRental">
+        <t t-call="website.layout">
+            <div class="container">
+                <br/>
+                <div class="row">
+                    <div class="col">
+                        <h3 align="center">VEHICLE RENTAL REQUEST</h3>
+                    </div>
+                    <div class="col">
+                        <a t-attf-href="/rent_requests" class="btn btn-outline-primary" style="margin-left: 70%">
+                            View Rent Request</a>
+                    </div>
+                </div>
+                <br/>
+                <form class="form" id="rental_form" method="post" action="/create/rent_request">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <div class="row mb-3">
+                        <label for="customer" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <select id="customer_ids" name="customer" class="form-control" required="1">
+                                <option value="">Select Customer</option>
+                                <t t-foreach="customer_ids" t-as="customer">
+                                    <option t-att-value="customer.id">
+                                        <t t-esc="customer.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="request_date" class="col-sm-2 col-form-label">Request Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="request_date" class="form-control" t-att-value="datetime.datetime.now().strftime('%Y-%m-%d')"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="vehicle" class="col-sm-2 col-form-label">Vehicle</label>
+                        <div class="col-sm-10">
+                            <select id="vehicle_ids" name="vehicle" class="form-control" required="1">
+                                <option value="">Select Vehicle</option>
+                                <t t-foreach="vehicle_ids" t-as="vehicle">
+                                    <option t-att-value="vehicle.id">
+                                        <t t-esc="vehicle.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="period_type" class="col-sm-2 col-form-label">Period Type</label>
+                        <div class="col-sm-10">
+                            <select id="period_types" name="period_type" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="from_date" class="col-sm-2 col-form-label" required="">From date</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="from_date" id="from_date" class="form-control" required="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="to_date" class="col-sm-2 col-form-label" required="">To date</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="to_date" id="to_date" class="form-control" required="1"/>
+                            <span id="date_check" style="color: red; visibility: hidden;">To Date must be after From Date</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="period" class="col-sm-2 col-form-label">Period</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="period" id="period" class="form-control" readonly="1" required="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="rent" class="col-sm-2 col-form-label">Rent</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="rent" id="rent" class="form-control" readonly="1" required="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        Not a customer ? <a t-attf-href="/customer">Create New</a>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <!-- To create the new customer template-->
+    <template id="website_customer_template" name="Partner">
+        <t t-call="website.layout">
+            <div class="container">
+                <form class="form col-6" method="post" action="/create/customer">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <br/>
+                    <h3>CREATE CUSTOMER</h3>
+                    <div class="row mb-3">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" class="form-control" placeholder="Enter the Name"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="email" class="form-control" placeholder="example@gmail.com"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="phone" class="form-control" placeholder="Enter your Phone Number"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="street" class="col-sm-2 col-form-label">Street</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="street" class="form-control" placeholder="Enter your Street"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="country" class="col-sm-2 col-form-label">Country</label>
+                        <div class="col-sm-10">
+                            <select id="country_ids" name="country" class="form-control">
+                                <option value="">Select Country</option>
+                                <t t-foreach="country_ids" t-as="country">
+                                    <option t-att-value="country.id">
+                                        <t t-esc="country.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a t-attf-href="/vehicle_rental">
+                            <button type="button" class="btn btn-outline-primary">Rent Request</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <!-- Successfully registered template-->
+    <template id="website_rental_success_template" name="Success">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">successfully Registered!</h4>
+                    <p>Aww yeah, you successfully registered for the rental vehicle.</p>
+                    <hr/>
+                    <p class="mb-0">Your created rental request number.<t t-esc="rent_request.sequence_no"/></p>
+                    <a t-attf-href="/rent_requests">
+                        <button type="button" class="btn btn-dark">Back</button>
+                    </a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Rent Request list view template-->
+    <template id="rent_request_list_template" name="request_list">
+        <t t-call="website.layout">
+            <div class="container">
+                <br/>
+                <div class="row">
+                    <div class="col">
+                        <center><h3>Vehicle Requests</h3></center>
+                    </div>
+
+                    <div class="col">
+                        <a t-attf-href="/vehicle_rental" class="btn btn-outline-primary" style="margin-left: 70%">
+                            Rent Request</a>
+                    </div>
+                </div>
+                <br/>
+                <table class="table table-bordered">
+                    <thead align="center">
+                        <tr>
+                            <th>Sequence No</th>
+                            <th>Customer</th>
+                            <th>Vehicle</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="rent_req" t-as="rec">
+                            <tr align="center">
+                                <td>
+                                    <t t-esc="rec.sequence_no"/>
+                                </td>
+                                <td>
+                                    <t t-esc="rec.customer_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="rec.vehicle_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="rec.state"/>
+                                </td>
+                                <td>
+                                    <a t-attf-href="/view/rent_request/{{slug(rec)}}" class="btn btn-secondary"> view </a>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+     <template id="rent_request_view_template" name="VehicleRental">
+        <t t-call="website.layout">
+            <div class="container">
+                <br/>
+                <div class="row">
+                    <div class="col">
+                        <h3 align="center">VEHICLE RENTAL DETAILS</h3>
+                    </div>
+                    <div class="col">
+                        <a t-attf-href="/rent_requests" class="btn btn-outline-primary" style="margin-left: 70%">
+                            View Rent Request</a>
+                    </div>
+                </div>
+                <br/>
+                <form class="form" id="rent_view_form">
+                    <div class="row mb-3">
+                        <label for="customer" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input name="name" class="form-control" t-att-value="rent_details.customer_id.name" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="request_date" class="col-sm-2 col-form-label">Request Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="request_date" class="form-control" t-att-value="rent_details.request_date" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="vehicle" class="col-sm-2 col-form-label">Vehicle</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="vehicle" class="form-control" t-att-value="rent_details.vehicle_id.name" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="period_type" class="col-sm-2 col-form-label">Period Type</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="period_type" class="form-control" t-att-value="rent_details.period_type_id" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="from_date" class="col-sm-2 col-form-label" required="">From date</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="from_date" class="form-control" t-att-value="rent_details.from_date" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="to_date" class="col-sm-2 col-form-label" required="">To date</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="to_date" class="form-control" t-att-value="rent_details.to_date" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="period" class="col-sm-2 col-form-label">Period</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="period" class="form-control" t-att-value="rent_details.period" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="rent" class="col-sm-2 col-form-label">Rent</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="rent" class="form-control" t-att-value="rent_details.rent" readonly="1"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>
