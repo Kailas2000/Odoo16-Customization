@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="RatingReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-foreach='receipt.orderlines']" position="inside">
+            <t t-if="line.product_quality">
+                <div class="small-ratings">
+                    <span>Product Quality:
+                        <t t-set="rating" t-value="line.product_quality"/>
+                        <i t-if="rating >= 1" class="fa fa-star"></i>
+                        <i t-if="rating >= 2" class="fa fa-star"></i>
+                        <i t-if="rating >= 3" class="fa fa-star"></i>
+                        <i t-if="rating >= 4" class="fa fa-star"></i>
+                        <i t-if="rating >= 5" class="fa fa-star"></i>
+                    </span>
+                </div>
+            </t>
+            <br/>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-esc='props.product.display_name']" position="after">
+            <br/>
+            <t t-if="props.product.product_quality">
+                <div class="small-ratings">
+                    <t t-set="rating" t-value="props.product.product_quality"/>
+                    <i t-if="rating >= 1" class="fa fa-star"></i>
+                    <i t-if="rating >= 2" class="fa fa-star"></i>
+                    <i t-if="rating >= 3" class="fa fa-star"></i>
+                    <i t-if="rating >= 4" class="fa fa-star"></i>
+                    <i t-if="rating >= 5" class="fa fa-star"></i>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>
