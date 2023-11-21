@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Email template for the content in the request.-->
+    <data>
+        <record id="request_email_template" model="mail.template">
+            <field name="name">Maintenance Email Template</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Details of Maintenance Request</field>
+            <field name="description">Sent to the customer to test mail</field>
+            <field name="body_html" type="html">
+<div>
+    <p>
+        Dear <t t-out="object.user_id.name"/>,
+        <br/>
+        <br/>
+        This is the mail regarding the maintenance request of <b><t t-out="object.equipment_id.name"/></b>.
+        <br/>
+        And the maintenance responsible person is <b><t t-out="object.user_id.name"/></b>.
+        <br/>
+        The scheduled date is <b><t t-out="object.schedule_date.strftime('%Y-%m-%d')"/></b>.
+        <br/>
+    </p>
+    Regards,
+    <br/>
+    <t t-out="object.company_id.name"/>
+</div>
+            </field>
+        </record>
+    </data>
+</odoo>

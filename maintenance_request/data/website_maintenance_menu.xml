@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Menu created for the rent request-->
+    <record id="website_maintenance_menu" model="website.menu">
+        <field name="name">Maintenance Request</field>
+        <field name="url">/maintenance_request</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">90</field>
+    </record>
+</odoo>

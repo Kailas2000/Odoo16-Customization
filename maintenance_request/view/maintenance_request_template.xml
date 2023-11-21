@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Template for the request form-->
+    <template id="website_maintenance_template" name="MaintenanceRequest">
+        <t t-call="website.layout">
+            <div class="container">
+                <br/>
+                <div class="row">
+                    <div class="col">
+                        <h3 align="center">MAINTENANCE REQUEST</h3>
+                    </div>
+                </div>
+                <br/>
+                <form class="form" id="maintenance_request_form" method="post" action="create/maintenance_request">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <div class="row mb-3">
+                        <label for="request" class="col-sm-2 col-form-label">Request</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="request" id="request" class="form-control" required="1" placeholder="Request Name"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="equipment" class="col-sm-2 col-form-label">Equipment</label>
+                        <div class="col-sm-10">
+                            <select id="equipment_id" name="equipment" class="form-control" required="1">
+                                <option value="">Select Equipment</option>
+                                <t t-foreach="equipment_id" t-as="equipment">
+                                    <option t-att-value="equipment.id">
+                                        <t t-esc="equipment.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="request_date" class="col-sm-2 col-form-label">Request Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="request_date" class="form-control" t-att-value="datetime.datetime.now().strftime('%Y-%m-%d')" readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="maintenance_type" name="maintenance_type" class="col-sm-2 col-form-label">Maintenance Type</label>
+                        <div class="col-sm-10">
+                            <input type="radio" name="radio" id="corrective"/>
+                            <label for="Corrective">Corrective</label>
+                            <input type="radio" name="radio" id="preventive" value="Preventive"/>
+                            <label for="Preventive">Preventive</label>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="team" class="col-sm-2 col-form-label">Team</label>
+                        <div class="col-sm-10">
+                            <select id="team_id" name="team" class="form-control" required="1">
+                                <option value="">Select Team</option>
+                                <t t-foreach="maintenance_team_id" t-as="team">
+                                    <option t-att-value="team.id">
+                                        <t t-esc="team.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="responsible" class="col-sm-2 col-form-label">Responsible</label>
+                        <div class="col-sm-10">
+                            <select id="responsible_id" name="responsible" class="form-control" required="1">
+                                <option value="">Select Responsible Person</option>
+                                <t t-foreach="responsible_id" t-as="responsible">
+                                    <option t-att-value="responsible.id">
+                                        <t t-esc="responsible.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="schedule_date" class="col-sm-2 col-form-label" required="">Schedule Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="schedule_date" id="schedule_date" class="form-control" required="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="object" class="btn btn-primary">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <!-- Successfully registered template-->
+    <template id="website_maintenance_request_success_template" name="Success">
+        <t t-call="website.layout">
+            <div class="container"><br/><br/>
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">successfully Registered!</h4>
+                    <p>Aww yeah, you successfully submitted the maintenance request.</p>
+                    <hr/>
+                    <a t-attf-href="/maintenance_request">
+                        <button type="button" class="btn btn-dark">Back</button>
+                    </a>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
