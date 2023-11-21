@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="Increment" owl="1">
+        <div class="d-flex align-items-center m-2">
+            <button class="btn btn-danger" t-on-click="() => this.onValueChange(-1)">
+                -
+            </button>
+            <span class="text-white m-2" t-esc="state.value"/>
+<!--         t-sec="" for the value set in the .js          -->
+            <button class="btn btn-success" t-on-click="() => this.onValueChange(1)">
+                +
+            </button>
+        </div>
+    </t>
+</templates>
