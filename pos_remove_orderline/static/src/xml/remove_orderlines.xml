@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<!--Inherit POS Orderline to add the custom field to remove the orderline-->
+    <t t-name="Remove_Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//li[hasclass('info')]" position="inside">
+            <div style="float: right;">
+                <span class="fa fa-times" t-on-click="remove_orderlines" t-attf-data-id="{{props.line.cid}}"></span>
+            </div>
+        </xpath>
+    </t>
+<!--Inherit POS Orderline to add the custom field to clear the all rederline in a single click-->
+    <t t-name="Remove_Order" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('control-buttons')]" position="inside">
+            <div class="control-button" style="color: #ed4134;" t-on-click="clear_orderlines">
+                <i class="fa fa-trash-o" aria-label="Clear" title="Clear"/>
+                Clear Cart
+            </div>
+        </xpath>
+    </t>
+</templates>
