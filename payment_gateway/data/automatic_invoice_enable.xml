@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- By default the field automatic invoice should be enable -->
+    <data noupdate="1">
+        <record id="automatic_invoice_true" model="ir.config_parameter">
+            <field name="key">sale.automatic_invoice</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>
