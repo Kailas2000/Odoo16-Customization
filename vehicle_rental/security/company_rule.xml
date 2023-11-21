@@ -1,0 +1,10 @@
+<odoo>
+    <record id="all_record_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field ref="model_rent_request" name="model_id"/>
+        <field name="domain_force">[(1,'=',1),
+            '|', ('company_id', 'in', company_ids), ('company_id', '=', False)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('vehicle_rental.vehicle_rental_manager_access'))]"/>
+    </record>
+</odoo>

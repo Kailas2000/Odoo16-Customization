@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Form for the wizard-->
+    <record id="rental_report_view_form" model="ir.ui.view">
+        <field name="name">report.wizard.form</field>
+        <field name="model">report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report PDF">
+                <sheet>
+                    <group class="oe_title">
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="name_id"/>
+                        <field name="customer_id"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="button_action_pdf" string="Print PDF" type="object" class="btn-primary"/>
+                    <button name="button_action_xlsx" string="Print XLSX" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--Wizard Action-->
+    <record id="rental_report" model="ir.actions.act_window">
+        <field name="name">Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="rental_report_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

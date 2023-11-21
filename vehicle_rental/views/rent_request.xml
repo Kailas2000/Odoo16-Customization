@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Tree View-->
+    <record id="rent_request_tree_view" model="ir.ui.view">
+        <field name="name">rent.request.tree</field>
+        <field name="model">rent.request</field>
+        <field name="arch" type="xml">
+            <tree string="Rental" decoration-warning="warning == True"
+                  decoration-danger="late == True">
+                <field name="sequence_no"/>
+                <field name="customer_id"/>
+                <field name="request_date"/>
+                <field name="vehicle_id"/>
+                <field name="period"/>
+                <field name="state"/>
+                <field name="rent" optional="hide"/>
+                <field name="from_date" optional="hide"/>
+                <field name="to_date" optional="hide"/>
+                <field name="warning" optional="hide"/>
+                <field name="late" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Form View    -->
+    <record id="rent_request_form_view" model="ir.ui.view">
+        <field name="name">rent.request.form</field>
+        <field name="model">rent.request</field>
+        <field name="arch" type="xml">
+            <form string="Rent Request">
+                <header>
+                    <!-- Button confirm and Return -->
+                    <button name="action_confirm" string="Confirm" type="object"
+                            states="draft" class="btn-primary" data-hotkey="g"
+                            context="{'validate_analytic': True}"
+                            groups="vehicle_rental.vehicle_rental_manager_access"/>
+                    <button id="action_return" name="action_return"
+                            string="Return" type="object" states="confirm"
+                            class="btn-primary"
+                            data-hotkey="v"
+                            context="{'validate_analytic': True}"
+                            attrs="{'invisible': [('state', 'in', ['confirm','draft','returned'])]}"/>
+                    <button name="create_invoice" string="Create Invoice"
+                            type="object" states="confirm" class="btn-primary"
+                            data-hotkey="w"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <!--                    Invoice Smart Button-->
+                    <div name="button_box" position="inside">
+                        <button name="action_view_invoice" type="object"
+                                string="Invoice" class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                attrs="{'invisible': [('invoice_count', '!=', True)]}">
+                        </button>
+                    </div>
+                    <!--                    Payment status(Ribbon) for invoices  -->
+                    <widget name="web_ribbon" title="Paid"
+                            attrs="{'invisible': [('payment_states', '!=', True)]}"/>
+                    <!--                    Sequence Number as Head-->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="sequence_no" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="customer_id"
+                                   widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer_id',
+                                        'show_address': 1}"
+                                   options="{&quot;always_reload&quot;: True}"/>
+                            <field name="request_date"/>
+                            <field name="vehicle_id"/>
+                            <field name="period_type_id"/>
+                        </group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="period"/>
+                            <field name="rent"/>
+                            <field name="warning"/>
+                            <field name="late"/>
+                            <field name="invoice_count" invisible="1"/>
+                            <field name="payment_states" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

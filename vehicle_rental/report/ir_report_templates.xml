@@ -1,0 +1,111 @@
+<odoo>
+    <template id="report_vehicle_rent">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <h2>VEHICLE RENTAL REPORT</h2>
+                    <h5>Report Date:
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                    </h5>
+                    <span t-if="data.get('from_date') != False">
+                        <p>
+                            <b>From Date:</b>
+                            <span t-esc="data.get('from_date')"/>
+                        </p>
+                    </span>
+                    <span t-if="data.get('to_date') != False">
+                        <p>
+                            <b>To Date:</b>
+                            <span t-esc="data.get('to_date')"/>
+                        </p>
+                    </span>
+                    <span t-if="data.get('name_id') != False">
+                        <p>
+                            <b>Vehicle Name:</b>
+                            <span t-esc="data.get('name_id')[1]"/>
+                        </p>
+                    </span>
+                    <span t-if="data.get('customer_id') != False">
+                        <p>
+                            <b>Customer Name:</b>
+                            <span t-esc="data.get('customer_id')[1]"/>
+                        </p>
+                    </span>
+                    <table class="table table-sm" name="vehicle_rental_table">
+                        <thead>
+                            <tr>
+                                <th name="th_sm_sl">
+                                    <strong>Sl.No</strong>
+                                </th>
+                                <th name="th_sm_customer"
+                                    t-if="data.get('customer_id') == False">
+                                    <strong>Customer Name</strong>
+                                </th>
+                                <th name="th_sm_model">
+                                    <strong>Model</strong>
+                                </th>
+                                <th name="th_sm_days">
+                                    <strong>No: of Days</strong>
+                                </th>
+                                <th name="th_sm_from_date">
+                                    <strong>Rent Start</strong>
+                                </th>
+                                <th name="th_sm_to_date">
+                                    <strong>Rent End</strong>
+                                </th>
+                                <th name="th_sm_state">
+                                    <strong>State</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="1"/>
+                            <t t-foreach="report" t-as="dynamic_rental_report">
+                                <tr>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="i"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;"
+                                        t-if="data.get('customer_id') == False">
+                                        <span>
+                                            <t t-esc="dynamic_rental_report['name']"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_rental_report['model']"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_rental_report['period']"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_rental_report['from_date']"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_rental_report['to_date']"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_rental_report['state']"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <t t-set="i" t-value="i+1"/>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

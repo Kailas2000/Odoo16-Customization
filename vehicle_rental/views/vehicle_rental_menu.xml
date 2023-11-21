@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Action for Rental Vehicle, Model:rental.vehicle-->
+    <record id="rental_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_def_state':1}</field>
+        <field name="name">Vehicle Rental</field>
+        <field name="res_model">rental.vehicle</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new lost reason
+            </p>
+            <p>
+                Use lost reasons to explain why an opportunity is lost.
+            </p>
+            <p>
+                Some examples of lost reasons: "We don't have people/skill", "Price too high"
+            </p>
+        </field>
+    </record>
+
+    <!--    Action for Rent Request, Model:rent.request-->
+    <record id="rent_request_action" model="ir.actions.act_window">
+        <field name="name">Rent Request</field>
+        <field name="res_model">rent.request</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new lost reason
+            </p>
+            <p>
+                Use lost reasons to explain why an opportunity is lost.
+            </p>
+            <p>
+                Some examples of lost reasons: "We don't have people/skill", "Price too high"
+            </p>
+        </field>
+    </record>
+
+<!--    Menu Bar-->
+    <menuitem id="rental_menu_root" name="Vehicle Rental" sequence="10"/>
+    <!--    Rent Request-->
+    <menuitem id="rental_first_menu_root" name="Rent Request" parent="rental_menu_root" sequence="1"/>
+    <menuitem parent="rental_first_menu_root" id="rental_first_submenu_root" name="Rent Request" action="rent_request_action"/>
+    <!--    Vehicle Rental-->
+    <menuitem id="rental_second_menu_root" name="Vehicle Rental" parent="rental_menu_root" sequence="2"/>
+    <menuitem parent="rental_second_menu_root" id="rental_second_submenu_root" name="Rental Vehicle" action="rental_action"/>
+    <!--    Report PDF-->
+    <menuitem id="rental_third_menu_root" name="Report" parent="rental_menu_root" sequence="3"/>
+    <menuitem parent="rental_third_menu_root" id="rental_third_submenu_root" name="Rental Report" action="rental_report"/>
+</odoo>
