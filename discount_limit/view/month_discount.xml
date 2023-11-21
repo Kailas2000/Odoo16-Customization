@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="month_discount_view_form" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="sheet" position="before">
+                <div class="alert alert-warning mb-0" role="alert"
+                     attrs="{'invisible': [('warning', '=', False)]}">
+                    <field name="warning" invisible="1"/>
+                    <span>Check the total discount, it's exceeded</span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
