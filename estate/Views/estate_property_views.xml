@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="real_estate_action" model="ir.actions.act_window">
+        <field name="name">Real Estate</field>
+        <field name="res_model">real.estate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new lost reason
+            </p>
+            <p>
+                Use lost reasons to explain why an opportunity is lost.
+            </p>
+            <p>
+                Some examples of lost reasons: "We don't have people/skill", "Price too high"
+            </p>
+        </field>
+    </record>
+
+<!--    Property Type-->
+    <record id="property_type_action" model="ir.actions.act_window">
+        <field name="name">Property Type</field>
+        <field name="res_model">property.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    Property Tag-->
+    <record id="property_tag_action" model="ir.actions.act_window">
+        <field name="name">Property Tag</field>
+        <field name="res_model">property.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    Menu Bar-->
+    <menuitem id="estate_menu_root" name="Estate" sequence="10"/>
+    <menuitem id="estate_first_menu_root" name="Advertisement" parent="estate_menu_root" sequence="8"/>
+    <menuitem parent="estate_first_menu_root" id="estate_first_submenu_root" name="Properties" action="real_estate_action"/>
+
+    <menuitem id="estate_second_menu_root" name="Settings" parent="estate_menu_root" sequence="9"/>
+    <menuitem parent="estate_second_menu_root" id="estate_second_submenu_root" name="Property Type" action="property_type_action"/>
+    <menuitem parent="estate_second_menu_root" id="estate_second_submenu_root2" name="Property Tag" action="property_tag_action"/>
+</odoo>
+
+
