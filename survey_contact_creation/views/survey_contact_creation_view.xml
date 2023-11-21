@@ -1,0 +1,21 @@
+<odoo>
+    <record id="survey_survey_view_form" model="ir.ui.view">
+        <field name="name">survey.survey.view.form.inherit</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+<!--    Add a custom page in the survey form to add the contact relation-->
+            <xpath expr="//page[@name='description_done']" position="after">
+                <page string="Contact Relation" name="contact_relation">
+                    <field name="contact_relation_ids">
+                        <tree string="Contact" editable="bottom" create="True">
+                            <field name="question_id"/>
+                            <field name="contact_fields_id"/>
+                            <field name="surveys_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
