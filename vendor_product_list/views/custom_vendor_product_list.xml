@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Added Custom field for Purchase Order - Is vendor products-->
+    <record id="vendor_product_list_view_form" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <group>
+                    <field name="is_vendor_products"/>
+                </group>
+            </field>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='invoice_lines']" position="after">
+                <field name="product_list_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
