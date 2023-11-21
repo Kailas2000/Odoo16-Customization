@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Form View-->
+    <record id="crm_team_form" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="commission_plan_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

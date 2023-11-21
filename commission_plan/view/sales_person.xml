@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Form View-->
+    <record id="res_users_simplified_form" model="ir.ui.view">
+        <field name="name">res.users.simplified.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <group>
+                    <field name="commission_plan_id"/>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>

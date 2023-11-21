@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Tree View-->
+    <record id="crm_commission_tree_view" model="ir.ui.view">
+        <field name="name">crm.commission.tree</field>
+        <field name="model">crm.commission</field>
+        <field name="arch" type="xml">
+            <tree string="Commission">
+                <field name="name"/>
+                <field name="active"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="type_selection"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Form View-->
+    <record id="crm_commission_form_view" model="ir.ui.view">
+        <field name="name">crm.commission.form</field>
+        <field name="model">crm.commission</field>
+        <field name="arch" type="xml">
+            <form string="Commission">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="type_selection"/>
+                        </group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="revenue_wise_type" attrs="{'invisible':[('type_selection', '=', 'product_wise')]}"/>
+                        </group>
+                    </group>
+                    <field name="product_type_ids"
+                           attrs="{'invisible':[('type_selection', '=', 'revenue_wise')]}">
+                        <tree string="Product Type" editable="bottom">
+                            <field name="product_cate_id"/>
+                            <field name="products_id"/>
+                            <field name="rate_percentage"/>
+                            <field name="max_commission_amount"/>
+                        </tree>
+                    </field>
+                    <field name="revenue_type_ids"
+                           attrs="{'invisible':[('type_selection', '=', 'product_wise')]}">
+                        <tree string="Revenue Type" editable="bottom">
+                            <field name="sequences" widget="handle"/>
+                            <field name="from_amount"/>
+                            <field name="to_amount"/>
+                            <field name="rate"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>
