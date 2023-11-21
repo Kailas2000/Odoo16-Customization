@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="SalesDashboard" owl="1">
+        <div class="overflow-auto bg-muted" style="overflow: auto; height:100%;">
+            <div class="row m-2">
+                <div class="col-md">
+<!--    Main head of the dashboard-->
+                    <div class="row m-2">
+                        <div class="shadow-sm border m-2 p-4" style="background-color: lavender;">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h1 class="text-primary fw-bold">Sales Dashboard</h1>
+                                <div>
+                                    <select class="form-select"
+                                            style="background-color: ghostwhite;"
+                                            t-model="state.period"
+                                            t-on-change="onChangePeriod_click">
+                                        <option value="30">Last 1 month</option>
+                                        <option value="90">Last 3 month</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+<!--    Div for Quotations-->
+                        <div class="col-lg-6">
+                            <div class="shadow-sm border m-2 p-4" t-on-click="onClickQuotations">
+                                <div class="h1 fw-bold text dark">
+                                    <t t-esc="this.state.data['quotation_count']"/>
+                                </div>
+                                <div class="h3 text-muted">Quotations</div>
+                                <div class="h3 mt-5">
+                                    <span> Since last period</span>
+                                </div>
+                            </div>
+                        </div>
+<!--    Div for Orders-->
+                        <div class="col-lg-6">
+                            <div class="shadow-sm border m-2 p-4" t-on-click="onClickOrders">
+                                <div class="h1 fw-bold text dark">
+                                    <t t-esc="this.state.data['order_count']"/>
+                                </div>
+                                <div class="h3 text-muted">Orders</div>
+                                <div class="h3 mt-5">
+                                    <span> Since last period</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+<!--    Div for Revenues-->
+                        <div class="col-lg-6">
+                            <div class="shadow-sm border m-2 p-4">
+                                <div class="h1 fw-bold text dark">$
+                                    <t t-esc="this.state.data['revenue']"/> K
+                                </div>
+                                <div class="h3 text-muted">Revenues</div>
+                                <div class="h3 mt-5">
+                                    <span> Since last period</span>
+                                </div>
+                            </div>
+                        </div>
+<!--    Div for Average Orders-->
+                        <div class="col-lg-6">
+                            <div class="shadow-sm border m-2 p-4">
+                                <div class="h1 fw-bold text dark">$
+                                    <t t-esc="this.state.data['avg_order']"/> K
+                                </div>
+                                <div class="h3 text-muted">Average Orders</div>
+                                <div class="h3 mt-5">
+                                    <span> Since last period</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--    Chart for Sales Team-->
+                <div class="col-md">
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Sales Team</h3>
+                        </div>
+                        <canvas t-ref="teamchart"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-2">
+<!--    Chart for Sales Person-->
+                <div class="col-md">
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Sales Person</h3>
+                        </div>
+                        <canvas t-ref="personchart"/>
+                    </div>
+                </div>
+                <div class="col-md">
+<!--    Chart for Top 10 customers-->
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Top 10 Customers</h3>
+                        </div>
+                        <canvas t-ref="customerchart"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-2">
+<!--    Chart for Lowest Selling Products-->
+                <div class="col-lg-3">
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Lowest Selling Products</h3>
+                        </div>
+                        <canvas t-ref="lowestchart"/>
+                    </div>
+                </div>
+<!--    Chart for Highest Selling Products-->
+                <div class="col-lg-3">
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Highest selling product</h3>
+                        </div>
+                        <canvas t-ref="highestchart"/>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+<!--    Chart for Order Status-->
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Order Status</h3>
+                        </div>
+                        <canvas t-ref="orderchart"/>
+                    </div>
+                </div>
+<!--    Chart for Invoice Status-->
+                <div class="col-lg-3">
+                    <div class="shadow-sm border m-2 p-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Invoice Status</h3>
+                        </div>
+                        <canvas t-ref="invoicechart"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
