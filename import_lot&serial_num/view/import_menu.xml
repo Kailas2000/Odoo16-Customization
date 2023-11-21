@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="import_lot_view_form" model="ir.ui.view">
+        <field name="name">import.lot.form</field>
+        <field name="model">import.lot</field>
+        <field name="arch" type="xml">
+            <form string="Import">
+                <group class="oe_title">
+                    <field name="file"/>
+                </group>
+            </form>
+            <footer>
+                <button name="import_lot_serial" string="Import" type="object" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </field>
+    </record>
+
+    <record id="action_view_import_lot_serial" model="ir.actions.act_window">
+        <field name="name">Import Lot/Serial</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.lot</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="import_lot_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+<!--    Custom Menu Bar in Sale order-->
+    <menuitem parent="stock.menu_stock_inventory_control" id="import_lot_serial_menu" name="Import Lot/Serial" action="action_view_import_lot_serial"/>
+</odoo>
