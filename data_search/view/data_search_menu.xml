@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Action created for the data search-->
+    <record id="data_search_action" model="ir.actions.act_window">
+        <field name="name">Data Search</field>
+        <field name="res_model">data.search</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!--    Menu Bar-->
+    <menuitem id="data_search_menu_root" name="Data Search" sequence="10"/>
+    <menuitem id="search_first_menu_root" name="Data Search" parent="data_search_menu_root" sequence="1"/>
+    <menuitem parent="search_first_menu_root" id="data_search_submenu_root" name="Data Search" action="data_search_action"/>
+</odoo>

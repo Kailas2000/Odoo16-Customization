@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_data_search,access_data_search,model_data_search,base.group_user,1,1,1,1
+access_search_data,access_search_data,model_searched_data,base.group_user,1,1,1,1
+

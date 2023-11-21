@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+       <!--Form View    -->
+    <record id="data_search_form_view" model="ir.ui.view">
+        <field name="name">data.search.form</field>
+        <field name="model">data.search</field>
+        <field name="arch" type="xml">
+            <form string="Data Search">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="data"/>
+                            <field name="model_ids"  widget="many2many_tags"
+                                   options="{'no_create': True}"/>
+                            <field name="fields_id"
+                                   options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <button name="action_search" string="Search"
+                                    type="object" class="btn-primary"/>
+                        </group>
+                    </group>
+                <!-- Tree view for the searched data listing -->
+                    <field name="record_ids">
+                        <tree string="Type" create="False" delete="False" editable="bottom">
+                            <field name="data" readonly="1"/>
+                            <field name="model" readonly="1"/>
+                            <button name="action_view_form" type="object"
+                                    class="fa fa-mail-forward"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
