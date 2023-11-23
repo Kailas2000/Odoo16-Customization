@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="survey_timer_count" inherit_id="survey.survey_fill_header">
+<!--    Added to show the timer decrementing the count by one in the survey form page -->
+        <xpath expr="//div[@class='o_survey_nav pt16 mb-2']//div[@class='container m-0 p-0']" position="inside">
+            <div class="row">
+                <div>
+                    <div class="col-lg-2 pt-4">
+                        <h2 id="question_timer"
+                            t-att-data-timer="survey.question_time"
+                            t-att-data-limited="survey.is_question_time">
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
+

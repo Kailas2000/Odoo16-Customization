@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="survey_survey_inherit_view" model="ir.ui.view">
+        <field name="name">survey.survey.inherit.view</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+<!--    Added the custom boolean and input field to specify the question timer -->
+            <xpath expr="//field[@name='scoring_type']" position="before">
+                <label for="is_question_time" string="Question Time Limit"/>
+                <div class="o_checkbox_optional_field">
+                    <field name="is_question_time" nolabel="1"/>
+                    <div attrs="{'invisible': [('is_question_time', '=', False)]}">
+                        <field name="question_time" nolabel="1" class="oe_inline"/> Seconds
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
