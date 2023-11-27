@@ -1,0 +1,73 @@
+<odoo>
+    <!-- This template is for attach the employee details with the email -->
+    <template id="report_expiry_email">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="row mt64 mb32">
+                        <div class="oe_structure"/>
+                        <h2>CONTRACT EXPIRY REPORT</h2>
+                        <h5>Report Date:
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                        </h5>
+                    </div>
+                    <table class="table table-bordered"
+                           name="contract_expiry_email_table">
+                        <thead>
+                            <tr>
+                                <th name="th_sm_sl">
+                                    <strong>Sl.No</strong>
+                                </th>
+                                <th name="th_sm_person">
+                                    <strong>Employee Name</strong>
+                                </th>
+                                <th name="th_sm_contract">
+                                    <strong>Contract Name</strong>
+                                </th>
+                                <th name="th_sm_from_date">
+                                    <strong>Start Date</strong>
+                                </th>
+                                <th name="th_sm_to_date">
+                                    <strong>End Date</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="1"/>
+                            <t t-foreach="report" t-as="dynamic_expiry_report">
+                                <tr>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="i"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_expiry_report.name"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_expiry_report.contract_id.name"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_expiry_report.contract_id.date_start"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span>
+                                            <t t-esc="dynamic_expiry_report.contract_id.date_end"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <t t-set="i" t-value="i+1"/>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

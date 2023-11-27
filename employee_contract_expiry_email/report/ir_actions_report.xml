@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Action for the template to create the pdf with employee details-->
+    <record id="action_report_contract_expire" model="ir.actions.report">
+        <field name="name">Contract Expiry</field>
+        <field name="model">contract.expiry.email</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">employee_contract_expiry_email.report_expiry_email</field>
+        <field name="report_file">employee_contract_expiry_email.report_expiry_email</field>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

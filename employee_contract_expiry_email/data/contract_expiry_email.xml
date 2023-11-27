@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!-- This is the mail with the content and subject-->
+    <data>
+        <record id="contract_expiry_email_template" model="mail.template">
+            <field name="name">Contract Expiry Email Template</field>
+            <field name="subject">Details of Employees who's contract is going to expire</field>
+            <field name="model_id" ref="employee_contract_expiry_email.model_contract_expiry_email"/>
+            <field name="body_html" type="html">
+<div>
+    <p>
+        This email is regarding the contract expiry of the employee.
+        <br/>
+        And the contract expiring employee details are below:
+    </p>
+</div>
+            </field>
+        </record>
+    </data>
+</odoo>

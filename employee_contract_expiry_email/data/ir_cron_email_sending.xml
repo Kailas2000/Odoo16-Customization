@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Schedule action for daily send the email to the manager
+     who's contract is going to be expire -->
+    <record id="ir_cron_contract_expiry" model="ir.cron">
+        <field name="name">Send an email</field>
+        <field name="model_id" ref="model_contract_expiry_email"/>
+        <field name="state">code</field>
+        <field name="code">model._contract_date_check()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+    </record>
+</odoo>
