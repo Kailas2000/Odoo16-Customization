@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!-- Template for the breadcrumbs for the event-->
+    <template id="portal_my_home_menu_events"
+              name="Portal layout : events menu entries"
+          	inherit_id="portal.portal_breadcrumbs" priority="60">
+    	<xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+        	<li t-if="page_name == 'events'"
+            	class="breadcrumb-item active">
+            	<span>Events</span>
+        	</li>
+            <li t-if="page_name == 'event'" class="breadcrumb-item active">
+                <a t-if="event_details" t-attf-href="/my/events?{{ keep_query() }}">Event</a>
+                <t t-else="">Event</t>
+            </li>
+    	</xpath>
+	</template>
+<!-- Template for adding the event in the portal my home-->
+    <template id="portal_my_home_events" name="Events"
+             customize_show="True" inherit_id="portal.portal_my_home">
+       <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+           <t t-call="portal.portal_docs_entry">
+               <t t-set="title">Events</t>
+               <t t-set="url" t-value="'/my/events'"/>
+               <t t-set="placeholder_count" t-value="'events_count'"/>
+           </t>
+       </xpath>
+    </template>
+<!-- List of events to show in the portal table-->
+    <template id="portal_my_events" name="My Events">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Events</t>
+            </t>
+            <t t-if="events" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Events</th>
+                        <th>College</th>
+                        <th>Start Date</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <t t-foreach="events" t-as="event">
+                    <tr>
+                        <td><a t-attf-href="/view/events/{{slug(event)}}"><t t-out="event.university_name"/></a></td>
+                        <td><span t-field="event.university_event"/></td>
+                        <td><span t-field="event.start_date"/></td>
+                        <td><span t-field="event.state"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+<!-- Template for the specific events to show the details-->
+    <template id="events_portal_template" name="Events Portal Template">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Events</t>
+            </t>
+            <div class="card pb-5">
+                <div id="introduction" class="pb-2 pt-3 card-header bg-white text-center">
+                    <h2 class="my-0">EVENTS</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="so_date">
+                        <div class="mb-3 col-6">
+                            <t>
+                                <strong>College Name:</strong>
+                             <span t-field="event_details.university_name"/>
+                            </t>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <strong>University Type:</strong>
+                             <span t-field="event_details.university_type"/>
+                        </div>
+                    </div>
+                    <div class="row" id="so_date">
+                        <div class="mb-3 col-6">
+                            <t>
+                                <strong>University Event:</strong>
+                             <span t-field="event_details.university_event"/>
+                            </t>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <strong>University Event Type:</strong>
+                             <span t-field="event_details.university_event_type"/>
+                        </div>
+                    </div>
+                    <div class="row" id="so_date">
+                        <div class="mb-3 col-6">
+                            <t>
+                                <strong>Start Date:</strong>
+                            <span t-field="event_details.start_date" t-options='{"widget": "date"}'/>
+                            </t>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <strong>End Date:</strong>
+                            <span t-field="event_details.end_date" t-options='{"widget": "date"}'/>
+                        </div>
+                    </div>
+                    <section id="details" style="page-break-inside: auto;" class="mt32">
+                        <h3 id="quote_3">Event Slots</h3>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead class="bg-100">
+                                    <tr align="center">
+                                        <th>Content</th>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="event_details.event_slot_ids" t-as="slot">
+                                        <tr align="center">
+                                            <td>
+                                                <t t-esc="slot.content"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="slot.state == 'Ongoing'">
+                                                    <span class="small badge text-bg-success orders_label_text_align"><t t-esc="slot.state"/></span>
+                                                </t>
+                                                <t t-if="slot.state == 'Upcoming'">
+                                                    <span class="small badge text-bg-warning orders_label_text_align"><t t-esc="slot.state"/></span>
+                                                </t>
+                                                <t t-if="slot.state == 'Finished'">
+                                                    <span class="small badge text-bg-danger orders_label_text_align"><t t-esc="slot.state"/></span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                   </section>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
+

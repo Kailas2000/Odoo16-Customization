@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Action created for the event-->
+    <record id="event_action" model="ir.actions.act_window">
+        <field name="name">Event</field>
+        <field name="res_model">events</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--    Menu Bar-->
+    <menuitem id="event_menu_root" name="Events" sequence="10"/>
+    <menuitem id="event_first_menu_root" name="Event" parent="event_menu_root" sequence="1"/>
+    <menuitem parent="event_first_menu_root" id="events_submenu_root" name="Events" action="event_action"/>
+</odoo>

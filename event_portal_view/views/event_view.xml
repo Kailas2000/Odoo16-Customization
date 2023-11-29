@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Tree View-->
+    <record id="events_tree_view" model="ir.ui.view">
+        <field name="name">events.tree</field>
+        <field name="model">events</field>
+        <field name="arch" type="xml">
+            <tree string="Events">
+                <field name="university_name"/>
+                <field name="university_code"/>
+                <field name="university_type"/>
+                <field name="university_event"/>
+                <field name="university_event_type" optional="hide"/>
+                <field name="state" optional="hide"/>
+                <field name="start_date" optional="hide"/>
+                <field name="end_date" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Form View    -->
+    <record id="event_form_view" model="ir.ui.view">
+        <field name="name">event.form</field>
+        <field name="model">events</field>
+        <field name="arch" type="xml">
+            <form string="Event">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="university_name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="university_code"/>
+                            <field name="university_type"/>
+                            <field name="university_event"/>
+                        </group>
+                        <group>
+                            <field name="university_event_type"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Event Slots">
+                            <field name="event_slot_ids">
+                                <tree string="Event Slot" editable="bottom">
+                                    <field name="from_time" widget="float_time"/>
+                                    <field name="to_time" widget="float_time"/>
+                                    <field name="content"/>
+                                    <field name="state" invisible="True"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>
+
