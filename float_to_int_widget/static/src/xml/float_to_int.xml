@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="Float_To_Int" t-inherit="web.FloatField" t-inherit-mode="primary" owl="1">
+        <xpath expr="//input" position="attributes">
+            <attribute name="t-ref">floatint</attribute>
+            <attribute name="t-on-change">UpdateFloat</attribute>
+            <attribute name="t-att-value">props.value</attribute>
+        </xpath>
+    </t>
+</templates>
