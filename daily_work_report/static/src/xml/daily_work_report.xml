@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="WorkReportDashboard" owl="1">
+        <div class="overflow-auto bg-muted" style="overflow: auto; height:100%;">
+            <div class="col-lg-10">
+                <div class="shadow-sm border m-2 p-4 bg-white">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="text-primary fw-bold">Employee Daily Work Report</h3>
+                        </div>
+                        <div class="col">
+                            <select class="form-select"
+                                    style="background-color: ghostwhite;"
+                                    t-model="state.period"
+                                    t-on-change="onChangePeriod">
+                                <option value="date">Date</option>
+                                <option value="employee">Employee</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas t-ref="workreport" t-on-click="canvasClick"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    Tree View-->
+    <record id="daily_work_report_tree_view" model="ir.ui.view">
+        <field name="name">daily.work.report.tree</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <tree string="Daily Report">
+                <field name="name"/>
+                <field name="employee"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Form View-->
+    <record id="daily_work_report_form_view" model="ir.ui.view">
+        <field name="name">daily.work.report.form</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <form string="Daily Report">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="True"/>
+                        <field name="employee" readonly="True"/>
+                        <field name="date" readonly="True"  />
+                    </group>
+                    <notebook>
+                        <page string="Work Report" name="report_body_page">
+                            <field name="work_report" type="html"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
