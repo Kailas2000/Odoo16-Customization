@@ -7,8 +7,6 @@
     QR Code generating based on the user input and the user can download the QR
     """,
     "depends": [ 'web' ],
-    "version": "16.0.1.0.0",
-
     "assets": {
         "web.assets_backend": [
             '/qr_generator/static/src/js/qr_generate.js',
