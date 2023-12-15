@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!-- Inherit the productitem template and added the combo product ribbon -->
+    <t t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('product-img')]" position="inside">
+            <t t-if="props.product.is_combo">
+                <div class="ribbon" style="background-color:#34d5eb; text-align:center;">
+                    Combo Product
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

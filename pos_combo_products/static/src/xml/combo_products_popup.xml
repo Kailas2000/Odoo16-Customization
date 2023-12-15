@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!--  Popup template-->
+    <t t-name="ComboProductsPopup" owl="1">
+        <div class="popup popup-comboproducts" style="width: 500px; height: 620px; background-color: #f5f9fa;">
+            <p class="title">
+                <t t-esc="props.title"/>
+            </p>
+            <!-- Required products-->
+            <div style="overflow: auto; height: 250px;">
+                <h4 style="background-color: #323d40; font-weight:bold; color:#f5f9fa">Required</h4>
+                <div class="container">
+                    <t t-foreach="props.required" t-as="required" t-key="required_index">
+                        <div class="title">
+                            <t t-esc="required.category"/>
+                        </div>
+                        <div class="row" style="display: flex;">
+                            <t t-foreach="required.products" t-as="products" t-key="products.id">
+                                <div class="col" style="padding-inline: 50px;">
+                                    <t t-if="products.image_128">
+                                        <img t-attf-src="/web/image?model=product.product&amp;field=image_128&amp;id={{products.id}}"
+                                             t-att-alt="products.display_name"/><br/>
+                                        <div id="combo_ribbon" class="ribbon" style="background-color:#34d5eb; font-size: 17px; text-align:center;">
+                                            Selected
+                                        </div><br/>
+                                        <t t-esc="products.display_name"/>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <!-- Optional products-->
+            <div style="overflow: auto; height: 250px;">
+                <h4 style="background-color: #323d40; font-weight:bold; color:#f5f9fa">Optional</h4>
+                <div class="container">
+                    <t t-foreach="props.optional" t-as="optional" t-key="optional_index">
+                        <div class="title">
+                            <t t-esc="optional.category"/><br/>
+                            <t t-foreach="props.body.count" t-as="count" t-key="count_index">
+                                <t t-if="optional.category == count.category">
+                                    <h5>Choose only <t t-esc="count.count"/> products</h5>
+                                </t>
+                            </t>
+                        </div>
+                        <div class="row" style="display: flex;">
+                            <t t-foreach="optional.products" t-as="products" t-key="products.id">
+                                <div class="col" style="padding-inline: 50px;">
+                                    <t t-if="products.image_128">
+                                        <img t-attf-src="/web/image?model=product.product&amp;field=image_128&amp;id={{products.id}}"
+                                             t-att-alt="products.display_name" t-on-click="() => this.select_product(products, props.body.count)"/>
+                                        <t t-foreach="this.state.id" t-as="id" t-key="id">
+                                            <t t-if="products.id == id">
+                                                <div id="combo_ribbon" class="ribbon" style="background-color:#34d5eb; font-size: 17px; text-align:center;">
+                                                    Selected
+                                                </div><br/>
+                                            </t>
+                                        </t>
+                                        <t t-esc="products.display_name"/>
+                                    </t><br/>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <!-- Footer Button -->
+            <div class="footer">
+                <div class="button confirm disable highlight dynamic-size" t-on-click="() => this.confirm(props.body)">
+                    <t t-esc="props.confirmText"/>
+                </div>
+                <div class="button cancel" t-on-click="cancel">
+                    Cancel
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
+

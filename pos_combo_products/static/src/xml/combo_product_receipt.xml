@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="ComboProductReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+    <!-- Inherit the receipt template and added the combo products details in the receipt-->
+        <xpath expr="//t[@t-foreach='receipt.orderlines']" position="inside">
+            <div class="pos-receipt-left-padding">
+                <t t-if="line.combo_required">
+                    <t t-foreach="line.combo_required" t-as="required" t-key="required_index">
+                        <t t-foreach="required.products" t-as="required_product" t-key="required_product_index">
+                            <span><t t-esc="required_product.display_name"/></span><br/>
+                        </t>
+                    </t>
+                </t>
+                <t t-if="line.combo_selected">
+                    <t t-foreach="line.combo_selected" t-as="selected" t-key="selected_index">
+                        <span><t t-esc="selected"/></span><br/>
+                    </t>
+                </t>
+                <br/>
+            </div>
+        </xpath>
+    </t>
+</templates>

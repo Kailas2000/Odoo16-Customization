@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <!-- Inherit the Orderline and added the required products and optional products in orderline-->
+    <t t-name="Orderline_Combo_product_details" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-if='customerNote']" position="after">
+            <div>
+                <t t-if="props.line.product.required">
+                    <t t-foreach="props.line.product.required" t-as="required" t-key="required_index">
+                        <t t-foreach="required.products" t-as="required_product" t-key="required_product_index">
+                            <span><t t-esc="required_product.display_name"/></span><br/>
+                        </t>
+                    </t>
+                </t>
+                <t t-if="props.line.product.selected">
+                    <t t-foreach="props.line.product.selected" t-as="selected" t-key="selected_index">
+                        <span><t t-esc="selected"/></span><br/>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+    </t>
+</templates>
