@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-inherit="point_of_sale.TicketScreen" t-inherit-mode="extension" owl="1">
+        <!-- Drop down -->
+        <xpath expr="//button[hasclass('highlight')]" position="after">
+            <input name="global_search" id="global search" type="checkbox" class="o-far-input"/>
+            <label for="global_search">Global Search</label>
+        </xpath>
+
+        <!-- Heading Mobile -->
+        <xpath expr="//div[@t-if='showCardholderName()']" position="before">
+            <div class="col">Mobile</div>
+        </xpath>
+
+        <!-- Customer Mobile Number -->
+        <xpath expr="//div[hasclass('order-row')]//div[@t-if='showCardholderName()']" position="before">
+            <div class="col">
+                <div t-if="env.isMobile">Mobile</div>
+                <div><t t-esc="getMobileNumber(order)"></t></div>
+            </div>
+        </xpath>
+    </t>
+</templates>
