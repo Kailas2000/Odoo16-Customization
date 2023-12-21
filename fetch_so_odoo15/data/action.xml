@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--  Fetch Sale Order wizard menu-->
+    <menuitem id="menu_fetch_so"  action="fetch_so"
+             name="Fetch SO" parent="sale.sale_menu_root" sequence="99"/>
+</odoo>

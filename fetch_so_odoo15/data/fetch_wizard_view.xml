@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form for the wizard-->
+    <record id="sale_order_fetch_view_form" model="ir.ui.view">
+        <field name="name">sale.order.fetch.wizard.form</field>
+        <field name="model">db.details.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fetch Sale Order">
+                <sheet>
+                    <group>
+                        <group class="oe_title">
+                            <field name="db_15"/>
+                            <field name="username_db_15"/>
+                            <field name="password_db_15" password="True"/>
+                        </group>
+                        <group class="oe_title">
+                            <field name="url_db15"/>
+                            <field name="password_db_16" password="True"/>
+                            <field name="url_db16"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_fetch_so" string="Fetch SO" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--Wizard Action-->
+    <record id="fetch_so" model="ir.actions.act_window">
+        <field name="name">Fetch Sale Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">db.details.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sale_order_fetch_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
