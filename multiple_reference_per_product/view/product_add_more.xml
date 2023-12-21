@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Added the custom button add more in the product form-->
+    <record id="product_product_view_form" model="ir.ui.view">
+        <field name="name">product.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="replace">
+                <label for="default_code"/>
+                <div class="o_row">
+                    <field name="default_code" readonly="1"/>
+                    <button name="action_add_more" string="Add More"
+                            type="object" class="btn-primary"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

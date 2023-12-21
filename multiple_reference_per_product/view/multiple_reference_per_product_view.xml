@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Tree View-->
+    <record id="product_multiple_reference_tree_view" model="ir.ui.view">
+        <field name="name">product.multiple.reference.tree</field>
+        <field name="model">product.multiple.reference</field>
+        <field name="arch" type="xml">
+            <tree string="Product">
+                <field name="multiple_product"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Form View    -->
+    <record id="product_multiple_reference_form_view" model="ir.ui.view">
+        <field name="name">product.multiple.reference.form</field>
+        <field name="model">product.multiple.reference</field>
+        <field name="arch" type="xml">
+            <form string="Product Multiple Reference">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="multiple_product"/>
+                            <button name="action_set_default"
+                                    type="object" string="Set as default"
+                                    class="btn-primary"/>
+                        </group>
+                        <group>
+                            <field name="product_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="product_multiple_reference_action" model="ir.actions.act_window">
+        <field name="name">Product Multiple Reference</field>
+        <field name="res_model">product.multiple.reference</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
